@@ -1,0 +1,21 @@
+extends layout
+
+block content
+  h1 Title: #{item.name}
+
+  p #[strong Description:] #{item.description}
+  p #[strong Category:]
+    each val, index in item.category
+      a(href=val.url) #{val.name}
+      if index < item.category.length - 1
+        |,
+
+    div(style='margin-left:20px;margin-top:20px')
+    p #[strong Price:] $#{item.price}
+    p #[strong Stock:] #{item.numberInStock} 
+
+    hr
+    p
+    a(href=item.url+'/delete') Delete Item
+    p
+    a(href=item.url+'/update') Update Item
