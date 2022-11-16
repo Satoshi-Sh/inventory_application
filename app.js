@@ -9,7 +9,6 @@ var usersRouter = require('./routes/users');
 var catalogRouter = require("./routes/catalog")
 
 require('dotenv').config()
-
 const compression = require("compression")
 const helmet = require("helmet")
 var app = express();
@@ -18,7 +17,13 @@ var app = express();
 const mongoose = require("mongoose");
 
 
-const mongoDB = process.env.KEY
+let mongoDB = ''
+if (process.env.KEY){
+  mongoDB =process.env.KEY
+}
+else {
+  mongoDB = process.env.url
+}
 mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true });
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
